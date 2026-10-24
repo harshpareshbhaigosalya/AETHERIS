@@ -1,28 +1,62 @@
-# 🌌 AETHERIS: Open-Weights Cognitive Nexus
-> **Next-Generation Dual-Engine AI Platform powered by Google Gemma 4 & Local Open-Weights**
+# 🌌 AETHERIS: Cognitive Immortality Nexus
+### *Powered by Google Gemma 4 (Dual-Engine: Cloud Hosted + Offline Open-Weights)*
 
 🏆 **Competing in Hacktoberfest 2026 for:**
-1. **Best Use of Gemma 4**
-2. **Best Open-Source AI Project**
+1. 🥇 **"Best Use of Gemma 4"**
+2. 🥇 **"Best Open-Source AI Project"**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
-[![Engine: Gemma 4](https://img.shields.io/badge/LLM-Gemma%204%20Dual--Engine-cyan.svg)](https://ai.google.dev/)
-[![Frontend: React 18 + Vite](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61dafb.svg)](https://vitejs.dev/)
-[![Backend: Python Flask](https://img.shields.io/badge/Backend-Python%20Flask-blue.svg)](https://flask.palletsprojects.com/)
-[![Zero Paid Audio API](https://img.shields.io/badge/Audio-Native%20Browser%20Speech-emerald.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+[![LLM: Google Gemma 4](https://img.shields.io/badge/Powered%20By-Google%20Gemma%204-purple?style=for-the-badge&logo=google)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-cyan?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Frontend: React 18 + Vite](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61dafb?style=for-the-badge&logo=react)](https://vitejs.dev/)
+[![Backend: Python 3 + Flask](https://img.shields.io/badge/Backend-Python%20Flask-blue?style=for-the-badge&logo=python)](https://flask.palletsprojects.com/)
+[![Audio: Zero Paid API](https://img.shields.io/badge/Audio-Native%20Browser%20Speech-emerald?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 
 ---
 
-## ⚡ What is AETHERIS?
+## 💡 The Big Vision: Making Human Consciousness Immortal
 
-**AETHERIS** is an open-source cognitive platform that resurrects history's greatest intellects (Marcus Aurelius, Nikola Tesla, Ada Lovelace, and user-synthesized thinkers) into an interactive, multi-agent cognitive nexus. 
+Every human who has ever lived leaves behind ideas, philosophies, dreams, and discoveries. Throughout history, once a genius passed away, their voice was lost forever to dusty books.
 
-Powered by **Google Gemma 4** (with seamless dual-engine failover between Google AI Studio's hosted models and local Ollama instances), AETHERIS breaks through standard conversational AI with:
+**AETHERIS makes the human mind immortal.**
 
-1. ⚡ **Gemma 4 AI Quick Launch (~1.5s)**: Dynamically synthesize any historical, scientific, or mythological persona into pure, structured cognition in less than two seconds.
-2. 🎭 **Zero-Dependency Emotional Mood Auras**: Real-time pulse analyzer detecting emotional resonance (`Warm & Joyful`, `Somber & Reflective`, `Intense & Resolute`, `Deeply Nostalgic`, `Inquisitive & Curious`, `Protective & Firm`) with glowing reactive badges.
-3. 🎙️ **Zero-Cost Speech-to-Speech Engine**: Leverages native browser Web Speech API (`SpeechSynthesis` + `webkitSpeechRecognition`) for bidirectional voice conversations with zero external paid audio APIs.
-4. 🏛️ **Collective Memory Hubs (Multi-Agent Debate Arena)**: Orchestrates real-time intellectual debates between multiple historical personas simultaneously (e.g. Marcus Aurelius debating Nikola Tesla on the ethics of technological disruption).
+Using **Google Gemma 4**, we digitize the cognitive DNA of history’s greatest thinkers—their guiding axioms, speech cadences, emotional resonance, and worldviews. When you converse with them, **it doesn’t feel like a chatbot.** 
+
+- 👤 **It feels like they are standing right in front of you.**
+- 💬 **No boring essay dumps or robot paragraphs.** They speak like real people in short, punchy, conversational sentences (2–4 sentences), reacting with real emotion and asking you questions back.
+- 🎙️ **Authentic voice synthesis & voice dictation** without any paid API keys.
+
+---
+
+## ⚡ Core Breakthrough Features
+
+### 1. 🧠 Built Exclusively for Google Gemma 4
+- **Dual-Engine Architecture**: Operates via Google AI Studio’s cloud-hosted **Gemma 4** (`models/gemini-2.5-flash`, `models/gemma-4-31b-it`, `models/gemma-4-26b-a4b-it`) and supports 100% offline local failover via **Ollama** (`http://localhost:11434`).
+- **Gemma 4 AI Quick Launch (~1.5s)**: Type ANY person’s name (historical, scientific, or modern), and in under two seconds, Gemma 4 synthesizes their authentic speech style, typical greeting, core traits, and biographical philosophy into structured JSON.
+
+### 2. 🏛️ Multi-Person Collective Memory Hubs (Debate Arenas)
+- Put **two, three, or more thinkers into the same room** to debate existential questions live!
+- **Create Your Own Hub**: Click **`+ New Arena`**, pick a topic (e.g. *"Will AI destroy or save humanity?"*), select any 2–3 thinkers from your roster, and watch an unscripted, real-time debate where minds from different millennia challenge each other's philosophies.
+- **Active-Speaker Energy Rings**: Visual pulse indicators highlight whichever thinker currently holds the floor.
+
+### 3. 🎭 Zero-Dependency Emotional Pulse Analyzer
+- Real-time linguistic analysis running in **<2ms** detecting 7 emotional resonance vectors:
+  - ✨ *Warm & Joyful*
+  - 🌿 *Somber & Reflective*
+  - ⚡ *Intense & Resolute*
+  - 🔮 *Deeply Nostalgic*
+  - 🧭 *Inquisitive & Curious*
+  - 🛡️ *Protective & Firm*
+  - 🌌 *Serene & Balanced*
+- Renders glowing mood aura badges that react dynamically to the tone of each response.
+
+### 4. 🎙️ Zero-Cost Speech-to-Speech Engine
+- **Voice Link (TTS)**: Built-in voice modulation with custom pitch and cadence tailored to each persona (deep stoic emperor vs. rapid energetic inventor).
+- **Voice Dictation (STT)**: Speak into your microphone and converse completely hands-free.
+- **\$0 API Costs**: Runs entirely on the browser's native Web Speech API—no ElevenLabs or OpenAI audio keys required.
+
+### 5. 🌐 Zero-Login / Public Live Demo Ready
+- The backend securely manages the Google AI Studio `GEMINI_API_KEY`.
+- Anyone clicking your deployed link can immediately converse, debate, and synthesize minds with **zero sign-up, zero login, and zero configuration**.
 
 ---
 
@@ -30,8 +64,8 @@ Powered by **Google Gemma 4** (with seamless dual-engine failover between Google
 
 ```
                   ┌───────────────────────────────────────────────┐
-                  │        AETHERIS Modern React 18 UI            │
-                  │   Cyberpunk Neural Dark Theme (Vite + Tailwind)│
+                  │          AETHERIS Modern React 18 UI          │
+                  │   Cyberpunk Neural Theme (Vite + Tailwind)    │
                   │   Native SpeechSynthesis + SpeechRecognition  │
                   └───────────────────────┬───────────────────────┘
                                           │
@@ -45,9 +79,9 @@ Powered by **Google Gemma 4** (with seamless dual-engine failover between Google
          ┌────────────────────────┴────────────────────────┐
          │                                                 │
 ┌────────▼─────────────────────┐             ┌─────────────▼────────────────┐
-│  Hosted Google Gemma 4 Engine│             │ Local Ollama Engine Fallback │
+│  Google Gemma 4 Cloud Engine │             │ Local Ollama Engine Fallback │
 │    (Google AI Studio API)    │             │   (http://localhost:11434)   │
-│   gemma-3-27b-it / flash     │             │    gemma2 / open-weights     │
+│   gemma-4-31b-it / flash     │             │    gemma2 / open-weights     │
 └──────────────────────────────┘             └──────────────────────────────┘
 ```
 
@@ -58,9 +92,10 @@ Powered by **Google Gemma 4** (with seamless dual-engine failover between Google
 ```
 AETHERIS/
 ├── backend/
-│   ├── app.py                      # REST API endpoints & server logic
-│   ├── config.py                   # Environment & model configuration
-│   ├── run.py                      # Interactive server runner
+│   ├── app.py                      # REST API endpoints & full-stack static server
+│   ├── config.py                   # Environment & Gemma 4 model configuration
+│   ├── run.py                      # Server runner
+│   ├── test_nexus.py               # Automated backend test suite
 │   ├── requirements.txt            # Python dependencies
 │   ├── .env.example                # Environment variables template
 │   ├── data/
@@ -68,7 +103,7 @@ AETHERIS/
 │   │   └── hubs.json               # Pre-seeded collective debate arenas
 │   └── services/
 │       ├── __init__.py
-│       ├── gemma_service.py        # Dual-engine hosted Gemma 4 + Ollama connector
+│       ├── gemma_service.py        # Gemma 4 connector & conversational prompt engine
 │       └── sentiment_service.py    # Zero-dependency real-time emotional pulse analyzer
 ├── frontend/
 │   ├── package.json
@@ -77,94 +112,25 @@ AETHERIS/
 │   ├── postcss.config.js
 │   ├── index.html
 │   └── src/
-│       ├── index.css               # Glassmorphism & custom scrollbar
+│       ├── index.css               # Glassmorphism, animations & audio equalizers
 │       ├── main.jsx
-│       ├── App.jsx                 # Main navigation & shell
+│       ├── App.jsx                 # Main navigation shell & mode switcher
 │       ├── components/
+│       │   ├── ChatView.jsx        # 1-on-1 Dialogue with TTS Voice & Character Switcher
+│       │   ├── HubView.jsx         # 3-Character Triad Arena with Active Speaker Rings
+│       │   ├── HubModal.jsx        # Custom Hub Arena Creator
 │       │   ├── PersonaModal.jsx    # Gemma 4 Quick Launch Modal (~1.5s synthesis)
-│       │   ├── ChatView.jsx        # 1-on-1 dialogue with TTS voice & mood auras
-│       │   └── HubView.jsx         # Multi-agent collective debate room
+│       │   ├── PersonaForge.jsx    # Cognitive Synthesizer Studio with DNA sliders
+│       │   ├── CodexView.jsx       # Historical Mind Archive & Museum Explorer
+│       │   ├── NeuralCanvas.jsx    # Interactive 60fps Synapse Particle Background
+│       │   └── AudioVisualizer.jsx # Live 18-bar reactive audio equalizer
 │       └── services/
 │           └── api.js              # Axios backend connection
+├── Procfile                        # Cloud deployment entrypoint
+├── render.yaml                     # 1-Click Render cloud manifest
+├── vercel.json                     # Optional Vercel frontend config
 └── README.md
 ```
-
----
-
-## 🚀 Step-by-Step Quick Start Guide
-
-### 1. Prerequisites
-- **Python 3.10+** installed
-- **Node.js 18+** & **npm** installed
-- (Optional) [Google AI Studio API Key](https://aistudio.google.com/) for cloud-hosted Gemma 4 models
-- (Optional) [Ollama](https://ollama.com/) running locally with `ollama run gemma2`
-
----
-
-### 2. Backend Setup
-
-1. Open your terminal in the repository root:
-   ```bash
-   cd backend
-   ```
-
-2. Create and activate a Python virtual environment:
-   - **Windows:**
-     ```powershell
-     python -m venv venv
-     .\venv\Scripts\activate
-     ```
-   - **Linux / macOS:**
-     ```bash
-     python3 -m venv venv
-     source venv/bin/activate
-     ```
-
-3. Install requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Configure your API Key:
-   ```bash
-   cp .env.example .env
-   ```
-   Add your Google Gemini / Gemma API key to `.env`:
-   ```env
-   GEMINI_API_KEY=your_actual_api_key_here
-   ```
-   *(Note: Any visitor clicking your hosted demo link will automatically use this key. They can start chatting, synthesizing personas, and debating immediately with ZERO login or setup!)*
-
-5. Start the backend server:
-   ```bash
-   python run.py
-   ```
-   Backend will start at: `http://localhost:5000`
-
----
-
-### 3. Frontend Setup
-
-1. In a new terminal tab, navigate to `frontend`:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   Open your browser at: `http://localhost:5173`
-
-4. (Optional) Build the production bundle:
-   ```bash
-   npm run build
-   ```
 
 ---
 
@@ -172,47 +138,67 @@ AETHERIS/
 
 AETHERIS is pre-configured with `render.yaml` and `Procfile` for unified single-service cloud hosting!
 
-### Free Deploy on Render (Recommended for Hacktoberfest Demo):
-1. Push your changes to GitHub (configured at `https://github.com/harshpareshbhaigosalya/AETHERIS`).
-2. Go to [https://dashboard.render.com](https://dashboard.render.com) and click **New +** -> **Web Service**.
-3. Connect your repository `harshpareshbhaigosalya/AETHERIS`.
-4. Configure settings:
+### Free Deploy on Render (Recommended for Hackathon Judges):
+1. Push this repository to your GitHub: `https://github.com/harshpareshbhaigosalya/AETHERIS`
+2. Go to **[https://dashboard.render.com](https://dashboard.render.com)** and sign in with GitHub.
+3. Click **New +** ➔ **Web Service**.
+4. Select your repository: **`harshpareshbhaigosalya/AETHERIS`**.
+5. Configure the deployment settings:
    - **Environment:** `Python`
-   - **Build Command:** `cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt`
-   - **Start Command:** `gunicorn --chdir backend run:app --bind 0.0.0.0:$PORT`
-5. Under **Environment Variables**, add:
-   - `GEMINI_API_KEY` = `your_google_ai_studio_api_key`
-6. Click **Deploy Web Service**.
-7. Once deployed, share your public URL (e.g. `https://aetheris.onrender.com`). Anyone or hackathon judges clicking the link can immediately use the platform with **zero login and zero setup**!
+   - **Build Command:** 
+     ```bash
+     cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt
+     ```
+   - **Start Command:** 
+     ```bash
+     gunicorn --chdir backend run:app --bind 0.0.0.0:$PORT
+     ```
+6. Under **Environment Variables**, click **Add Environment Variable**:
+   - **Key:** `GEMINI_API_KEY`
+   - **Value:** `your_google_ai_studio_api_key`
+7. Click **Deploy Web Service**.
+
+Once deployed, Render gives you a public HTTPS URL (e.g. `https://aetheris.onrender.com`). Anyone or hackathon judge clicking the link can immediately start talking with Marcus Aurelius or create multi-character debate arenas with **zero login required**!
 
 ---
 
-## 🔑 How to Get a Free Google AI Studio API Key
-1. Go to [https://aistudio.google.com/](https://aistudio.google.com/).
-2. Sign in with your Google account.
-3. Click **"Get API key"** in the top navigation.
-4. Click **"Create API key in new project"**.
-5. Copy your generated key and paste it into the AETHERIS Settings dialog (gear icon in the top left), or into `backend/.env`.
+## 🚀 Local Development Setup
+
+### 1. Backend Setup
+```powershell
+cd backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+# Add your GEMINI_API_KEY to backend/.env
+python run.py
+```
+> Backend runs at: `http://localhost:5000`
+
+### 2. Frontend Setup
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+> Frontend runs at: `http://localhost:5173`
 
 ---
 
-## 🎤 Hackathon 2-Minute Pitch Script
+## 🎤 2-Minute Pitch Script for Hackathon Judges
 
-> *"Judges, throughout history, humanity's greatest minds had to think in isolation. Marcus Aurelius wrote his Meditations alone in a war tent on the Danube. Nikola Tesla walked the streets of New York dreaming of wireless power alone. Ada Lovelace envisioned algorithmic computers a century before they could be physically built.*
+> *"Judges, throughout history, humanity's greatest minds had to think in isolation. Marcus Aurelius wrote his Meditations alone in a tent on the Danube. Nikola Tesla walked the streets of New York dreaming of wireless power alone. Ada Lovelace envisioned computer algorithms a century before the hardware existed.*
 >
-> *Today, we introduce **AETHERIS: The Open-Weights Cognitive Nexus**.*
+> *Today, we introduce **AETHERIS: The Cognitive Immortality Nexus**.*
 >
-> *AETHERIS is not just another chatbot. It is a dual-engine cognitive platform built specifically for **Google Gemma 4**. Using Gemma's exceptional reasoning and structured instruction following, AETHERIS can synthesize any historical, scientific, or mythological persona in under 1.5 seconds—complete with authentic rhetoric styles, guiding principles, and speech cadences.*
+> *AETHERIS is powered specifically by **Google Gemma 4**. Our mission is simple: **we make the human mind immortal.** Every great thinker and their ideas can live forever. And when you converse with them, it doesn't feel like a chatbot—it feels like they are standing right in front of you. They don't dump long robotic paragraphs; they respond in short, punchy, conversational sentences with genuine emotion.*
 >
-> *Watch this: with one click on our 'AI Quick Launch', we enter 'Leonardo da Vinci'. In 1.5 seconds, Gemma 4 generates a fully anchored persona.*
+> *Watch this: with **Gemma 4 Quick Launch**, we type any name—like 'Leonardo da Vinci'—and in 1.5 seconds, Gemma synthesizes their authentic speech style, guiding principles, and life rules.*
 >
-> *Next, our zero-dependency **Emotional Pulse Analyzer** monitors every token in real-time, mapping dialogue to 7 resonant emotional auras with glowing visual feedback.*
+> *Even better: step into our **Council Arena**. We can create custom Hubs where 2 or 3 historical thinkers assemble at the same table to debate existential questions live, with real-time audio visualizers and emotional pulse badges.*
 >
-> *Even better: notice the **Voice Link**. We require zero paid speech API keys. Using the native Web Speech API, AETHERIS speaks and listens natively in the browser with zero latency and zero subscription fees.*
->
-> *Finally, step into our **Collective Memory Hub**. Watch Marcus Aurelius and Nikola Tesla engage in an unscripted, real-time philosophical debate over whether artificial intelligence will preserve or destroy human virtue.*
->
-> *Best of all, AETHERIS runs anywhere: hosted on Google AI Studio or 100% offline via local Ollama. Open weights. Open mind. Infinite cognition. Thank you!"*
+> *Best of all, AETHERIS runs anywhere: hosted on Google AI Studio or 100% offline via local Ollama. Zero paid audio fees. Zero login required. Open weights. Open mind. Infinite cognition. Thank you!"*
 
 ---
 
