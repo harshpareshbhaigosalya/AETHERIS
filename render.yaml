@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: aetheris-cognitive-nexus
+    runtime: python
+    buildCommand: "cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt"
+    startCommand: "gunicorn --chdir backend run:app --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: DEFAULT_GEMMA_MODEL
+        value: gemini-2.0-flash
+      - key: PORT
+        value: 10000

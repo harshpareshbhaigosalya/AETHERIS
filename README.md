@@ -125,7 +125,7 @@ AETHERIS/
    pip install -r requirements.txt
    ```
 
-4. Configure your API Key (Optional):
+4. Configure your API Key:
    ```bash
    cp .env.example .env
    ```
@@ -133,7 +133,7 @@ AETHERIS/
    ```env
    GEMINI_API_KEY=your_actual_api_key_here
    ```
-   *(Note: You can also easily enter or change your API key directly inside the UI settings modal at any time!)*
+   *(Note: Any visitor clicking your hosted demo link will automatically use this key. They can start chatting, synthesizing personas, and debating immediately with ZERO login or setup!)*
 
 5. Start the backend server:
    ```bash
@@ -165,6 +165,25 @@ AETHERIS/
    ```bash
    npm run build
    ```
+
+---
+
+## ☁️ 1-Click Free Cloud Deployment (Zero Login / Public Demo)
+
+AETHERIS is pre-configured with `render.yaml` and `Procfile` for unified single-service cloud hosting!
+
+### Free Deploy on Render (Recommended for Hacktoberfest Demo):
+1. Push your changes to GitHub (configured at `https://github.com/harshpareshbhaigosalya/AETHERIS`).
+2. Go to [https://dashboard.render.com](https://dashboard.render.com) and click **New +** -> **Web Service**.
+3. Connect your repository `harshpareshbhaigosalya/AETHERIS`.
+4. Configure settings:
+   - **Environment:** `Python`
+   - **Build Command:** `cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt`
+   - **Start Command:** `gunicorn --chdir backend run:app --bind 0.0.0.0:$PORT`
+5. Under **Environment Variables**, add:
+   - `GEMINI_API_KEY` = `your_google_ai_studio_api_key`
+6. Click **Deploy Web Service**.
+7. Once deployed, share your public URL (e.g. `https://aetheris.onrender.com`). Anyone or hackathon judges clicking the link can immediately use the platform with **zero login and zero setup**!
 
 ---
 

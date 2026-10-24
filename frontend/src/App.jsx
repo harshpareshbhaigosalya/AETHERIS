@@ -25,10 +25,11 @@ export default function App() {
   const [selectedHub, setSelectedHub] = useState(null);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'hub'
 
-  // Settings & Engine State
+  // Settings & Engine State (Cloud Gemma 4 is default)
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('aetheris_api_key') || '');
   const [useLocal, setUseLocal] = useState(() => localStorage.getItem('aetheris_use_local') === 'true');
   const [isVoiceLinkOn, setIsVoiceLinkOn] = useState(() => localStorage.getItem('aetheris_voice_link') === 'true');
+  const [hasServerKey, setHasServerKey] = useState(false);
 
   // Modals & Panels
   const [isPersonaModalOpen, setIsPersonaModalOpen] = useState(false);
@@ -67,10 +68,11 @@ export default function App() {
           setSelectedHub(loadedHubs[0]);
         }
 
-        // Test health
+        // Test health and detect server-side API key
         const health = await api.checkHealth();
         if (health?.status === 'online') {
           setHealthStatus('online');
+          setHasServerKey(Boolean(health?.has_server_api_key));
         } else {
           setHealthStatus('offline');
         }
@@ -246,14 +248,21 @@ export default function App() {
         </div>
 
         {/* Engine status footer */}
-        <div className="p-3 border-t border-slate-800/80 bg-slate-950/90 text-[11px]">
+        <div className="p-3 border-t border-slate-800/80 bg-slate-950/90 text-[11px] space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-purple-400" />
-              <span>Engine Mode:</span>
+              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Engine:</span>
             </span>
-            <span className="font-mono text-purple-300 font-semibold">
-              {useLocal ? 'Local Ollama' : 'Google Gemma 4'}
+            <span className="font-mono text-cyan-300 font-semibold">
+              {useLocal ? 'Local Ollama' : 'Cloud Gemma 4'}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-[10px]">
+            <span className="text-slate-500">Access:</span>
+            <span className="text-emerald-400 flex items-center gap-1 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              {hasServerKey ? 'Backend Key Active (Free Demo)' : 'Direct Public Access'}
             </span>
           </div>
         </div>
@@ -310,22 +319,35 @@ export default function App() {
               </button>
             </div>
 
-            {/* Google Gemini API Key Input */}
+            {/* Live Demo Banner */}
+            <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-xs space-y-1">
+              <div className="flex items-center space-x-1.5 text-cyan-300 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Zero-Login Cloud Demo</span>
+              </div>
+              <p className="text-slate-300 text-[11px] leading-relaxed">
+                {hasServerKey 
+                  ? "A Google AI Studio key is configured directly in the backend. Anyone visiting your link can interact with Gemma 4, synthesize personas, and debate with zero setup or login!"
+                  : "To let visitors use this demo without inputting an API key, add GEMINI_API_KEY to your backend environment variables or .env file."}
+              </p>
+            </div>
+
+            {/* Optional Custom API Key */}
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Google AI Studio API Key
+                Custom Google AI Studio Key (Optional Override)
               </label>
               <div className="relative">
                 <input
                   type="password"
-                  placeholder="Paste your Gemini API key (optional if set in .env)"
+                  placeholder={hasServerKey ? "Using backend key (leave empty to keep using it)" : "Paste your Gemini API key (AI Studio)"}
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-xs font-mono outline-none focus:border-purple-500"
                 />
               </div>
               <p className="text-[11px] text-slate-400">
-                Powers hosted Gemma 4 models (e.g. `gemma-3-27b-it` or `gemini-2.0-flash`). Free keys from Google AI Studio work instantly.
+                Only needed if you wish to override the backend's shared cloud key with your personal quota.
               </p>
             </div>
 

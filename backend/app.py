@@ -1,14 +1,16 @@
 import os
 import json
 import uuid
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from config import Config
 from services.gemma_service import GemmaService
 from services.sentiment_service import SentimentService
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
+
+FRONTEND_DIST = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "dist"))
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 PERSONAS_FILE = os.path.join(DATA_DIR, "personas.json")
@@ -36,10 +38,12 @@ hubs_db = load_json_data(HUBS_FILE)
 
 @app.route("/api/health", methods=["GET"])
 def health():
+    server_key = Config.GEMINI_API_KEY or os.environ.get("GEMINI_API_KEY", "")
     return jsonify({
         "status": "online",
         "service": "AETHERIS Cognitive Nexus",
-        "gemma_engine": "Dual-engine (Google AI Studio Gemma 4 + Local Ollama)",
+        "gemma_engine": "Google AI Studio Gemma 4 (Cloud Hosted)",
+        "has_server_api_key": bool(server_key),
         "active_personas": len(personas_db),
         "active_hubs": len(hubs_db)
     }), 200
@@ -178,6 +182,21 @@ def chat_group_send():
         }), 200
     except Exception as e:
         return jsonify({"error": f"Group deliberation error: {str(e)}"}), 500
+
+# Serve React SPA Frontend for Unified Cloud Deployment
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    if path != "" and os.path.exists(os.path.join(FRONTEND_DIST, path)):
+        return send_from_directory(FRONTEND_DIST, path)
+    index_path = os.path.join(FRONTEND_DIST, "index.html")
+    if os.path.exists(index_path):
+        return send_from_directory(FRONTEND_DIST, "index.html")
+    return jsonify({
+        "service": "AETHERIS Cognitive Nexus API",
+        "status": "online",
+        "hint": "Frontend build not detected in frontend/dist. Run 'npm run build' in frontend/ to bundle UI."
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=Config.PORT, debug=Config.DEBUG)
