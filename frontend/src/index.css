@@ -7,66 +7,124 @@
     background-color: #030712;
     color: #f8fafc;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
   }
 }
 
 /* Custom Neural Glass Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(3, 7, 18, 0.7);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.35);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.5));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.6);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.8), rgba(6, 182, 212, 0.8));
 }
 
-/* Glow and Glassmorphism utilities */
+/* Glassmorphism & Cyber Holographic utilities */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(11, 17, 32, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.neon-border-violet {
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.25);
 }
 
-.neon-border-cyan {
-  border: 1px solid rgba(6, 182, 212, 0.4);
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+/* Aurora Ambient Glow Background */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Ambient background grid */
+.aurora-blob {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.22;
+  border-radius: 9999px;
+  animation: floatAurora 18s ease-in-out infinite alternate;
+}
+
+.aurora-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+  top: -100px;
+  left: 10%;
+}
+
+.aurora-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -150px;
+  right: 5%;
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.aurora-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+  top: 40%;
+  right: 25%;
+  animation-duration: 26s;
+  animation-delay: -10s;
+}
+
+@keyframes floatAurora {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 40px) scale(1.15);
+  }
+  100% {
+    transform: translate(-40px, -30px) scale(0.95);
+  }
+}
+
+/* Ambient Grid Texture */
 .neural-grid {
-  background-image: radial-gradient(rgba(168, 85, 247, 0.12) 1px, transparent 1px),
-                    radial-gradient(rgba(6, 182, 212, 0.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  background-position: 0 0, 18px 18px;
+  background-image: 
+    radial-gradient(rgba(168, 85, 247, 0.14) 1px, transparent 1px),
+    radial-gradient(rgba(6, 182, 212, 0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
 }
 
 /* Dynamic Aura Pulse */
 @keyframes auraPulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.9;
+    opacity: 0.85;
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.12);
     opacity: 1;
   }
 }
@@ -75,14 +133,33 @@
   animation: auraPulse 2.4s ease-in-out infinite;
 }
 
+/* Audio Visualizer Equalizer Bar Bounce */
 @keyframes bounceHeight {
   0% {
     height: 15%;
     opacity: 0.4;
   }
   100% {
-    height: 95%;
+    height: 98%;
     opacity: 1;
   }
 }
 
+/* Shimmering Text Animation */
+@keyframes shimmerText {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #c084fc 0%, #38bdf8 40%, #f472b6 80%, #c084fc 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerText 6s linear infinite;
+}

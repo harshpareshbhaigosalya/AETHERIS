@@ -21,21 +21,21 @@ export default function NeuralCanvas() {
     window.addEventListener('resize', handleResize);
 
     // Particle nodes configuration
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 65);
+    const particleCount = Math.min(Math.floor((width * height) / 16000), 75);
     const particles = [];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: Math.random() * 1.8 + 0.8,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1,
         color: i % 3 === 0 ? 'rgba(168, 85, 247, ' : i % 3 === 1 ? 'rgba(6, 182, 212, ' : 'rgba(236, 72, 153, '
       });
     }
 
-    let mouse = { x: null, y: null, maxDist: 140 };
+    let mouse = { x: null, y: null, maxDist: 160 };
 
     const handleMouseMove = (e) => {
       mouse.x = e.clientX;
@@ -65,9 +65,9 @@ export default function NeuralCanvas() {
         // Draw node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + '0.7)';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.color + '0.8)';
+        ctx.fillStyle = p.color + '0.85)';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color + '1)';
         ctx.fill();
         ctx.shadowBlur = 0;
 
@@ -78,13 +78,13 @@ export default function NeuralCanvas() {
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.18;
+          if (dist < 140) {
+            const alpha = (1 - dist / 140) * 0.22;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
-            ctx.lineWidth = 0.75;
+            ctx.lineWidth = 0.85;
             ctx.stroke();
           }
         }
@@ -96,12 +96,12 @@ export default function NeuralCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < mouse.maxDist) {
-            const alpha = (1 - dist / mouse.maxDist) * 0.35;
+            const alpha = (1 - dist / mouse.maxDist) * 0.45;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 1.2;
             ctx.stroke();
           }
         }
@@ -121,9 +121,19 @@ export default function NeuralCanvas() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-40"
-    />
+    <>
+      {/* Ambient Moving Aurora Lighting Blobs */}
+      <div className="aurora-bg">
+        <div className="aurora-blob aurora-1" />
+        <div className="aurora-blob aurora-2" />
+        <div className="aurora-blob aurora-3" />
+      </div>
+
+      {/* 60fps Interactive Neural Particles */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-0 opacity-50"
+      />
+    </>
   );
 }

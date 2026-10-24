@@ -423,32 +423,41 @@ export default function ChatView({ persona, personas = [], onSelectPersona, apiK
               {!isUser && msg.mood && renderMoodBadge(msg.mood, msg.mood_label)}
 
               <div
-                className={`relative max-w-[85%] md:max-w-[75%] rounded-2xl px-5 py-4 transition shadow-lg ${
+                className={`relative max-w-[85%] md:max-w-[75%] rounded-2xl p-4 md:p-5 transition shadow-2xl ${
                   isUser
-                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-br-none shadow-purple-950/40'
-                    : 'bg-slate-900/80 border border-slate-800 text-slate-100 rounded-bl-none shadow-slate-950/60 backdrop-blur-md'
+                    ? 'bg-gradient-to-br from-purple-600 via-indigo-600 to-indigo-700 text-white rounded-br-sm shadow-purple-950/40 border border-purple-400/30'
+                    : 'bg-slate-900/80 border border-slate-800 text-slate-100 rounded-bl-sm shadow-black/40 backdrop-blur-xl'
                 }`}
               >
+                {/* Persona Header in Bubble */}
+                {!isUser && (
+                  <div className="flex items-center space-x-2 mb-2 pb-1.5 border-b border-white/5">
+                    <span className="text-base">{persona.avatar_symbol || '🏛️'}</span>
+                    <span className="font-bold text-xs text-cyan-300">{persona.name}</span>
+                    <span className="text-[10px] text-slate-500 font-mono">• {persona.epoch}</span>
+                  </div>
+                )}
+
                 {/* Message Content */}
-                <div className="prose prose-invert prose-sm max-w-none break-words leading-relaxed">
+                <div className="prose prose-invert prose-sm max-w-none break-words leading-relaxed text-[13px] md:text-sm font-normal">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {msg.content}
                   </ReactMarkdown>
                 </div>
 
                 {/* Footer bar with timestamp and action buttons */}
-                <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400/80">
-                  <span>{msg.timestamp}</span>
+                <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400/80">
+                  <span className="font-mono">{msg.timestamp}</span>
 
-                  <div className="flex items-center space-x-2 opacity-80 group-hover:opacity-100 transition">
+                  <div className="flex items-center space-x-1.5 opacity-80 group-hover:opacity-100 transition">
                     {/* Read Aloud Replay Button for persona messages */}
                     {!isUser && (
                       <button
                         onClick={() => speakMessage(msg.content, msg.id)}
                         title={isSpeaking ? "Stop Speaking" : "Replay Spoken Audio"}
-                        className={`p-1 rounded-md transition ${
+                        className={`p-1.5 rounded-lg transition ${
                           isSpeaking 
-                            ? 'text-cyan-400 bg-cyan-500/20' 
+                            ? 'text-cyan-300 bg-cyan-500/20 shadow-[0_0_10px_rgba(6,182,212,0.3)]' 
                             : 'hover:text-cyan-300 hover:bg-slate-800'
                         }`}
                       >
@@ -460,7 +469,7 @@ export default function ChatView({ persona, personas = [], onSelectPersona, apiK
                     <button
                       onClick={() => handleCopy(msg.content, msg.id)}
                       title="Copy to Clipboard"
-                      className="p-1 rounded-md hover:text-slate-200 hover:bg-slate-800 transition"
+                      className="p-1.5 rounded-lg hover:text-slate-200 hover:bg-slate-800 transition"
                     >
                       {copiedId === msg.id ? (
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
@@ -478,12 +487,12 @@ export default function ChatView({ persona, personas = [], onSelectPersona, apiK
         {/* Loading Indicator */}
         {isLoading && (
           <div className="flex items-center space-x-3 text-slate-400 py-2 animate-pulse">
-            <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-sm">
+            <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-lg shadow-inner">
               {persona.avatar_symbol || '✨'}
             </div>
-            <div className="flex items-center space-x-1.5 text-xs text-purple-300">
-              <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
-              <span>{persona.name} is formulating cognition...</span>
+            <div className="flex items-center space-x-2 text-xs text-purple-300 bg-slate-900/60 px-3 py-1.5 rounded-full border border-purple-500/20">
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
+              <span>{persona.name} is contemplating your query...</span>
             </div>
           </div>
         )}
@@ -492,43 +501,43 @@ export default function ChatView({ persona, personas = [], onSelectPersona, apiK
       </div>
 
       {/* Quick Starter Prompts (Icebreaker Pills) */}
-      <div className="px-4 md:px-8 py-2 flex flex-wrap gap-2 border-t border-slate-900/60 bg-slate-950/80">
-        <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1 my-auto mr-1">
-          <Sparkles className="w-3 h-3 text-purple-400" /> Starter Prompts:
+      <div className="px-4 md:px-8 py-2 flex flex-wrap gap-2 border-t border-slate-900/60 bg-slate-950/60 backdrop-blur-md">
+        <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1 my-auto mr-1 font-mono">
+          <Sparkles className="w-3 h-3 text-purple-400" /> Inquiries:
         </span>
         {icebreakerPills.map((pill, idx) => (
           <button
             key={idx}
             onClick={() => sendMessage(pill)}
             disabled={isLoading}
-            className="px-3 py-1 rounded-full text-xs bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 hover:bg-purple-500/10 text-slate-300 hover:text-purple-200 transition text-left truncate max-w-[280px]"
+            className="px-3 py-1 rounded-full text-xs bg-slate-900/80 border border-slate-800/80 hover:border-cyan-400/50 hover:bg-cyan-500/10 text-slate-300 hover:text-cyan-200 transition text-left truncate max-w-[280px] shadow-sm"
           >
             {pill}
           </button>
         ))}
       </div>
 
-      {/* Input Field Bar */}
-      <div className="p-4 md:px-8 bg-slate-900/80 border-t border-slate-800/80 backdrop-blur-xl">
+      {/* Floating Glassmorphic Input Bar */}
+      <div className="p-4 md:px-8 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             sendMessage();
           }}
-          className="flex items-center space-x-2"
+          className="relative flex items-center p-1.5 rounded-2xl bg-slate-900/90 border border-slate-700/80 focus-within:border-cyan-400 focus-within:ring-2 focus-within:ring-cyan-400/20 shadow-2xl backdrop-blur-2xl transition"
         >
           {/* Voice Input (SpeechRecognition) button */}
           <button
             type="button"
             onClick={toggleSpeechRecognition}
             title={isRecording ? "Listening... (Click to stop)" : "Speak via Voice Recognition"}
-            className={`p-3 rounded-xl border transition ${
+            className={`p-2.5 rounded-xl border transition ${
               isRecording
                 ? 'bg-rose-500/20 border-rose-500 text-rose-400 animate-pulse shadow-[0_0_15px_rgba(244,63,94,0.4)]'
                 : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40'
             }`}
           >
-            {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+            {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
 
           <input
@@ -537,15 +546,16 @@ export default function ChatView({ persona, personas = [], onSelectPersona, apiK
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isLoading}
-            className="flex-1 px-4 py-3 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-slate-100 placeholder-slate-500 text-sm outline-none transition"
+            className="flex-1 px-4 py-2.5 bg-transparent text-slate-100 placeholder-slate-500 text-sm outline-none font-normal"
           />
 
           <button
             type="submit"
             disabled={isLoading || !inputValue.trim()}
-            className="p-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-white shadow-lg shadow-purple-950/50 transition"
+            className="p-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed text-white shadow-lg shadow-purple-950/50 transition flex items-center gap-1.5 text-xs font-semibold"
           >
-            <Send className="w-5 h-5" />
+            <Send className="w-4 h-4" />
+            <span className="hidden sm:inline">Send</span>
           </button>
         </form>
       </div>
