@@ -23,6 +23,7 @@ import {
   Loader2,
   ChevronDown
 } from 'lucide-react';
+import AudioVisualizer from './AudioVisualizer';
 
 export default function ChatView({ persona, apiKey, useLocal, isVoiceLinkOn, onToggleVoiceLink }) {
   const [messages, setMessages] = useState([]);
@@ -288,6 +289,14 @@ export default function ChatView({ persona, apiKey, useLocal, isVoiceLinkOn, onT
 
         {/* Controls */}
         <div className="flex items-center space-x-3">
+          {/* Real-time Audio Spectrum */}
+          {(Boolean(activeSpeechMsgId) || isRecording) && (
+            <AudioVisualizer 
+              isActive={true} 
+              mode={isRecording ? 'listening' : 'speaking'} 
+            />
+          )}
+
           {/* Persona Info Accordion Toggle */}
           <button
             onClick={() => setShowPersonaInfo(!showPersonaInfo)}

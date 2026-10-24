@@ -74,3 +74,15 @@
 .aura-pulse {
   animation: auraPulse 2.4s ease-in-out infinite;
 }
+
+@keyframes bounceHeight {
+  0% {
+    height: 15%;
+    opacity: 0.4;
+  }
+  100% {
+    height: 95%;
+    opacity: 1;
+  }
+}
+

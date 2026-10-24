@@ -11,11 +11,16 @@ import {
   Layers,
   ChevronRight,
   ShieldCheck,
-  Cpu
+  Cpu,
+  BookOpen,
+  Wand2
 } from 'lucide-react';
 import ChatView from './components/ChatView';
 import HubView from './components/HubView';
 import PersonaModal from './components/PersonaModal';
+import CodexView from './components/CodexView';
+import PersonaForge from './components/PersonaForge';
+import NeuralCanvas from './components/NeuralCanvas';
 import api from './services/api';
 
 export default function App() {
@@ -140,15 +145,66 @@ export default function App() {
           </div>
         </div>
 
-        {/* AI Quick Launch Button */}
-        <div className="p-4 border-b border-slate-800/60">
+        {/* Primary Navigation Modes */}
+        <div className="p-3 border-b border-slate-800/70 grid grid-cols-2 gap-1.5 bg-slate-950/60">
+          <button
+            onClick={() => setActiveTab('chat')}
+            className={`py-2 px-2.5 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition ${
+              activeTab === 'chat'
+                ? 'bg-purple-600 text-white shadow-md shadow-purple-950/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Brain className="w-3.5 h-3.5" />
+            <span>Dialogue</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('hub')}
+            className={`py-2 px-2.5 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition ${
+              activeTab === 'hub'
+                ? 'bg-cyan-600 text-white shadow-md shadow-cyan-950/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Users className="w-3.5 h-3.5" />
+            <span>Council</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('codex')}
+            className={`py-2 px-2.5 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition ${
+              activeTab === 'codex'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Codex</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('forge')}
+            className={`py-2 px-2.5 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition ${
+              activeTab === 'forge'
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-pink-950/40'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <Wand2 className="w-3.5 h-3.5" />
+            <span>Studio</span>
+          </button>
+        </div>
+
+        {/* AI Quick Launch Fast Synthesis Button */}
+        <div className="p-3 border-b border-slate-800/60">
           <button
             onClick={() => setIsPersonaModalOpen(true)}
             className="w-full py-2.5 px-3.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 shadow-md shadow-purple-950/40 transition flex items-center justify-between group"
           >
             <span className="flex items-center space-x-2">
               <Sparkles className="w-4 h-4 text-cyan-200 group-hover:rotate-12 transition-transform" />
-              <span>Gemma 4 Quick Launch</span>
+              <span>Gemma 4 Quick Launch (~1.5s)</span>
             </span>
             <Plus className="w-4 h-4 text-purple-200" />
           </button>
@@ -268,8 +324,11 @@ export default function App() {
         </div>
       </aside>
 
+      {/* Ambient Neural Particle Canvas */}
+      <NeuralCanvas />
+
       {/* Main View Area */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden">
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative z-10">
         {activeTab === 'chat' && selectedPersona ? (
           <ChatView
             persona={selectedPersona}
@@ -285,6 +344,25 @@ export default function App() {
             apiKey={apiKey}
             useLocal={useLocal}
             isVoiceLinkOn={isVoiceLinkOn}
+          />
+        ) : activeTab === 'codex' ? (
+          <CodexView
+            personas={personas}
+            onSelectPersona={(p) => {
+              setSelectedPersona(p);
+              setActiveTab('chat');
+            }}
+            onOpenForge={() => setActiveTab('forge')}
+          />
+        ) : activeTab === 'forge' ? (
+          <PersonaForge
+            onPersonaCreated={(newP) => {
+              handlePersonaCreated(newP);
+              setActiveTab('chat');
+            }}
+            apiKey={apiKey}
+            useLocal={useLocal}
+            onCancel={() => setActiveTab('chat')}
           />
         ) : (
           <div className="flex-1 flex items-center justify-center p-8 text-center text-slate-500">

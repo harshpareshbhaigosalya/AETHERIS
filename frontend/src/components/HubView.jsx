@@ -18,6 +18,7 @@ import {
   RotateCcw,
   MessageSquare
 } from 'lucide-react';
+import AudioVisualizer from './AudioVisualizer';
 
 export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn }) {
   const [messages, setMessages] = useState([]);
@@ -239,6 +240,10 @@ export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn
 
         {/* Participating Personas Roster with Active Speaker Ring */}
         <div className="flex items-center space-x-3">
+          {Boolean(activeSpeechMsgId) && (
+            <AudioVisualizer isActive={true} mode="speaking" />
+          )}
+
           <div className="flex items-center -space-x-2 overflow-hidden py-1">
             {activePersonas.map((p) => {
               const isSpeaking = activeSpeakerId === p.id;
