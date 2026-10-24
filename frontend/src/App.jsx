@@ -13,7 +13,8 @@ import {
   ShieldCheck,
   Cpu,
   BookOpen,
-  Wand2
+  Wand2,
+  Home
 } from 'lucide-react';
 import ChatView from './components/ChatView';
 import HubView from './components/HubView';
@@ -22,6 +23,7 @@ import HubModal from './components/HubModal';
 import CodexView from './components/CodexView';
 import PersonaForge from './components/PersonaForge';
 import NeuralCanvas from './components/NeuralCanvas';
+import LandingPage from './components/LandingPage';
 import api from './services/api';
 
 export default function App() {
@@ -29,7 +31,8 @@ export default function App() {
   const [hubs, setHubs] = useState([]);
   const [selectedPersona, setSelectedPersona] = useState(null);
   const [selectedHub, setSelectedHub] = useState(null);
-  const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'hub'
+  const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'hub' | 'codex' | 'forge'
+  const [viewMode, setViewMode] = useState('landing'); // 'landing' | 'core'
 
   // Settings & Engine State (Cloud Gemma 4 is default)
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('aetheris_api_key') || '');
@@ -114,6 +117,15 @@ export default function App() {
     setActiveTab('hub');
   };
 
+  if (viewMode === 'landing') {
+    return (
+      <LandingPage
+        onEnterCore={() => setViewMode('core')}
+        personas={personas}
+      />
+    );
+  }
+
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-slate-950 text-slate-100 font-sans neural-grid">
       {/* Left Sidebar */}
@@ -137,6 +149,14 @@ export default function App() {
           </div>
 
           <div className="flex items-center space-x-1.5">
+            <button
+              onClick={() => setViewMode('landing')}
+              title="Return to Landing Page"
+              className="px-2 py-1 text-[10px] font-bold rounded-lg bg-slate-900/90 border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-950/40 transition flex items-center gap-1 shadow-sm"
+            >
+              <Home className="w-3 h-3 text-cyan-400" />
+              <span>Landing</span>
+            </button>
             <div
               title={healthStatus === 'online' ? "Nexus Core Online" : "Connecting to Core..."}
               className={`w-2 h-2 rounded-full ${
