@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import AudioVisualizer from './AudioVisualizer';
 
-export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn }) {
+export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn, onOpenCreateHub }) {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isDeliberating, setIsDeliberating] = useState(false);
@@ -31,8 +31,8 @@ export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn
   const messagesEndRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
 
-  // Active personas participating in this hub
-  const activePersonas = personas.filter(p => hub?.persona_ids?.includes(p.id));
+  // Active personas participating in this hub (up to 3)
+  const activePersonas = personas.filter(p => hub?.persona_ids?.includes(p.id)).slice(0, 3);
 
   useEffect(() => {
     if (!hub) return;
@@ -244,27 +244,15 @@ export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn
             <AudioVisualizer isActive={true} mode="speaking" />
           )}
 
-          <div className="flex items-center -space-x-2 overflow-hidden py-1">
-            {activePersonas.map((p) => {
-              const isSpeaking = activeSpeakerId === p.id;
-              return (
-                <div
-                  key={p.id}
-                  title={`${p.name} (${p.archetype})`}
-                  className={`relative w-9 h-9 rounded-full flex items-center justify-center text-sm bg-slate-850 border-2 transition transform hover:scale-110 z-0 ${
-                    isSpeaking
-                      ? 'border-cyan-400 ring-4 ring-cyan-400/40 z-10 scale-105'
-                      : 'border-slate-700'
-                  }`}
-                >
-                  {p.avatar_symbol || '✨'}
-                  {isSpeaking && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 aura-pulse" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {/* Create Hub Button */}
+          {onOpenCreateHub && (
+            <button
+              onClick={onOpenCreateHub}
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-md shadow-cyan-950/40 transition flex items-center space-x-1.5"
+            >
+              <span>+ New Arena</span>
+            </button>
+          )}
 
           <button
             onClick={handleClearHub}
@@ -274,6 +262,39 @@ export default function HubView({ hub, personas, apiKey, useLocal, isVoiceLinkOn
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
+      </div>
+
+      {/* 3-Character Triad Stage Podiums */}
+      <div className="px-6 py-3 bg-slate-950/80 border-b border-slate-900 grid grid-cols-1 sm:grid-cols-3 gap-3 z-10">
+        {activePersonas.map((p, idx) => {
+          const isSpeaking = activeSpeakerId === p.id;
+          return (
+            <div
+              key={p.id}
+              className={`p-2.5 rounded-xl border transition flex items-center space-x-3 ${
+                isSpeaking
+                  ? 'bg-cyan-950/40 border-cyan-400 ring-2 ring-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.25)]'
+                  : 'bg-slate-900/50 border-slate-800/80 text-slate-400'
+              }`}
+            >
+              <div className={`relative w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-slate-950 border ${isSpeaking ? 'border-cyan-400' : 'border-slate-800'}`}>
+                {p.avatar_symbol || '🏛️'}
+                {isSpeaking && (
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 aura-pulse" />
+                )}
+              </div>
+              <div className="overflow-hidden flex-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-xs text-white truncate">{p.name}</span>
+                  <span className="text-[9px] font-mono uppercase text-cyan-300/80 bg-cyan-950/60 px-1 rounded">
+                    Seat {idx + 1}
+                  </span>
+                </div>
+                <div className="text-[10px] text-slate-400 truncate">{p.archetype}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Messages Stream */}

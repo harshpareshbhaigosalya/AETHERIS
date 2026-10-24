@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import AudioVisualizer from './AudioVisualizer';
 
-export default function ChatView({ persona, apiKey, useLocal, isVoiceLinkOn, onToggleVoiceLink }) {
+export default function ChatView({ persona, personas = [], onSelectPersona, apiKey, useLocal, isVoiceLinkOn, onToggleVoiceLink }) {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -106,8 +106,21 @@ export default function ChatView({ persona, apiKey, useLocal, isVoiceLinkOn, onT
     // Clean markdown characters for clean speech
     const cleanText = text.replace(/[*#`_\[\]()]/g, '');
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
+    
+    // Distinct vocal cadence tuning per historical figure
+    if (persona.name.includes("Marcus")) {
+      utterance.pitch = 0.85; // Deep, meditative emperor
+      utterance.rate = 0.88;
+    } else if (persona.name.includes("Tesla")) {
+      utterance.pitch = 1.12; // High-frequency, visionary inventor
+      utterance.rate = 1.02;
+    } else if (persona.name.includes("Ada")) {
+      utterance.pitch = 1.05; // Articulate, poetic science cadence
+      utterance.rate = 0.96;
+    } else {
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+    }
 
     // Try finding appropriate voice
     const voices = synthRef.current.getVoices();
@@ -344,6 +357,32 @@ export default function ChatView({ persona, apiKey, useLocal, isVoiceLinkOn, onT
           </button>
         </div>
       </div>
+
+      {/* Quick Character Ribbon */}
+      {personas?.length > 1 && (
+        <div className="px-6 py-2 bg-slate-950/90 border-b border-slate-900 flex items-center space-x-2 overflow-x-auto z-10">
+          <span className="text-[10px] font-mono uppercase text-slate-400 mr-1 flex-shrink-0">
+            Switch Mind:
+          </span>
+          {personas.map((p) => {
+            const isCurrent = p.id === persona.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => onSelectPersona?.(p)}
+                className={`px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1.5 transition flex-shrink-0 ${
+                  isCurrent
+                    ? 'bg-purple-600 text-white shadow-md shadow-purple-950/40 border border-purple-400/40'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                }`}
+              >
+                <span>{p.avatar_symbol || '✨'}</span>
+                <span>{p.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Persona Codex Drawer (Collapsible) */}
       {showPersonaInfo && (

@@ -46,6 +46,12 @@ export const api = {
     return res.data.hubs || [];
   },
 
+  // Create a new custom debate hub
+  createHub: async (hubData) => {
+    const res = await apiClient.post('/hubs/create', hubData);
+    return res.data.hub;
+  },
+
   // Send 1-on-1 dialogue message with real-time sentiment analysis
   sendChatMessage: async ({ personaId, message, history = [], apiKey = '', useLocal = false }) => {
     const res = await apiClient.post('/chat/send', {

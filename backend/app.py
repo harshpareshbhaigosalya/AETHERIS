@@ -88,6 +88,36 @@ def create_persona():
 def get_hubs():
     return jsonify({"hubs": hubs_db}), 200
 
+@app.route("/api/hubs/create", methods=["POST"])
+def create_hub():
+    data = request.get_json() or {}
+    title = data.get("title", "").strip()
+    topic = data.get("topic", "").strip()
+    persona_ids = data.get("persona_ids", [])
+
+    if not title or not topic:
+        return jsonify({"error": "Title and topic are required to create a hub"}), 400
+
+    new_id = "hub-" + str(uuid.uuid4())[:8]
+    new_hub = {
+        "id": new_id,
+        "title": title,
+        "topic": topic,
+        "description": data.get("description", f"Council debate exploring: {topic}"),
+        "persona_ids": persona_ids if isinstance(persona_ids, list) else [],
+        "icon": data.get("icon", "🏛️"),
+        "prompts": data.get("prompts", [
+            f"What is your core stance on: {topic}?",
+            "How do your philosophies clash or align on this?",
+            "What is the ultimate takeaway for our world?"
+        ])
+    }
+
+    hubs_db.append(new_hub)
+    save_json_data(HUBS_FILE, hubs_db)
+
+    return jsonify({"hub": new_hub, "message": "Council Arena established successfully"}), 201
+
 @app.route("/api/persona/synthesize", methods=["POST"])
 def synthesize_persona():
     """

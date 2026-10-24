@@ -211,19 +211,19 @@ Return a JSON object with EXACTLY the following structure:
     @classmethod
     def generate_chat_response(cls, persona: dict, message: str, history: list = None, api_key: str = None, use_local: bool = False) -> dict:
         """
-        Generates in-character response and analyzes real-time mood sentiment.
+        Generates genuine human-like conversational dialogue (no robotic paragraphs or essay dumps).
         """
         system_instruction = (
             f"You are {persona.get('name')}, {persona.get('archetype')}, from {persona.get('epoch')}.\n"
-            f"Speech Style: {persona.get('speech_style')}\n"
+            f"Speech Cadence & Style: {persona.get('speech_style')}\n"
             f"Guiding Principles: {', '.join(persona.get('guiding_principles', []))}\n"
-            f"Core Traits: {', '.join(persona.get('core_traits', []))}\n"
-            f"Biography: {persona.get('bio')}\n\n"
-            "DIRECTIVES:\n"
-            "- Always remain completely in character as this persona.\n"
-            "- Speak naturally, incorporating their authentic historical perspective, vocabulary, and worldview.\n"
-            "- Do not break character or refer to yourself as an AI assistant.\n"
-            "- Answer the user directly, eloquently, and engagingly."
+            f"Core Traits: {', '.join(persona.get('core_traits', []))}\n\n"
+            "CRITICAL CONVERSATIONAL RULES:\n"
+            "1. DO NOT dump essays, lists, or long multi-paragraph lectures. Real people never speak in giant essays.\n"
+            "2. Keep your reply direct, punchy, and authentic (2 to 4 conversational sentences maximum).\n"
+            "3. Speak in first person ('I', 'we') with your distinctive historical vocabulary and genuine personality.\n"
+            "4. React directly to the user's emotion and question, then naturally throw a sharp, thought-provoking question back to keep the dialogue lively.\n"
+            "5. Never break character or mention that you are an AI or language model."
         )
 
         response_text = cls.execute_prompt(
@@ -246,34 +246,34 @@ Return a JSON object with EXACTLY the following structure:
     @classmethod
     def generate_group_debate(cls, hub: dict, active_personas: list, message: str, history: list = None, api_key: str = None, use_local: bool = False) -> list:
         """
-        Generates coordinated multi-agent discussion between active personas in a Collective Hub.
+        Generates coordinated 3-character live round-table discourse.
+        Each character gives a sharp, vivid 1-2 sentence reaction, challenging and building on each other.
         """
         responses = []
         conversation_context = history.copy() if history else []
 
-        # If user submitted a message, add it to context
         if message:
             conversation_context.append({"role": "user", "content": message})
 
-        # Allow up to 2-3 personas to chime in consecutively
-        for persona in active_personas[:3]:
-            # Build group prompt reflecting past personas' statements
-            other_personas_names = [p["name"] for p in active_personas if p["id"] != persona["id"]]
+        # Ensure up to 3 distinct council members debate
+        speakers = active_personas[:3]
+
+        for idx, persona in enumerate(speakers):
+            other_names = [p["name"] for p in speakers if p["id"] != persona["id"]]
+            
             system_instruction = (
-                f"You are {persona.get('name')}, {persona.get('archetype')}, participating in an intellectual council "
-                f"at '{hub.get('title')}' - {hub.get('topic')}.\n"
-                f"You are conversing with the user and esteemed peers: {', '.join(other_personas_names)}.\n"
-                f"Speech Style: {persona.get('speech_style')}\n"
-                f"Guiding Principles: {', '.join(persona.get('guiding_principles', []))}\n\n"
-                "DIRECTIVES:\n"
-                "- Address the inquiry and constructively build upon or critique the viewpoints of your fellow council members.\n"
-                "- Stay strictly in character.\n"
-                "- Keep your contribution concise and punchy (1-2 paragraphs)."
+                f"You are {persona.get('name')}, {persona.get('archetype')}.\n"
+                f"You are in a lively live intellectual debate with peers: {', '.join(other_names)} on the topic: '{hub.get('topic')}'.\n"
+                f"Speech Style: {persona.get('speech_style')}\n\n"
+                "CONVERSATION DIRECTIVES:\n"
+                "- Keep your reaction tight, vibrant, and punchy (1 to 2 sharp sentences only).\n"
+                "- Address the inquiry directly or passionately call out a peer's argument.\n"
+                "- NEVER write paragraphs or bullet points. Speak like you are sitting right across from them in an intense argument."
             )
 
             prompt = (
-                f"The council is addressing: \"{message or hub.get('topic')}\". "
-                "Offer your distinctive philosophy and insight to the assembly."
+                f"The topic is: \"{message or hub.get('topic')}\". "
+                f"Deliver your sharpest 1-2 sentence interjection now."
             )
 
             try:

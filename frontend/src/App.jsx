@@ -18,6 +18,7 @@ import {
 import ChatView from './components/ChatView';
 import HubView from './components/HubView';
 import PersonaModal from './components/PersonaModal';
+import HubModal from './components/HubModal';
 import CodexView from './components/CodexView';
 import PersonaForge from './components/PersonaForge';
 import NeuralCanvas from './components/NeuralCanvas';
@@ -38,6 +39,7 @@ export default function App() {
 
   // Modals & Panels
   const [isPersonaModalOpen, setIsPersonaModalOpen] = useState(false);
+  const [isHubModalOpen, setIsHubModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [healthStatus, setHealthStatus] = useState('checking');
 
@@ -94,6 +96,12 @@ export default function App() {
     setPersonas(prev => [...prev, newPersona]);
     setSelectedPersona(newPersona);
     setActiveTab('chat');
+  };
+
+  const handleHubCreated = (newHub) => {
+    setHubs(prev => [...prev, newHub]);
+    setSelectedHub(newHub);
+    setActiveTab('hub');
   };
 
   const handleSelectPersona = (persona) => {
@@ -264,9 +272,19 @@ export default function App() {
                 <Users className="w-3 h-3 text-cyan-400" />
                 Collective Memory Hubs
               </span>
-              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-1.5 py-0.5 rounded-full">
-                {hubs.length}
-              </span>
+              <div className="flex items-center space-x-1.5">
+                <button
+                  onClick={() => setIsHubModalOpen(true)}
+                  title="Create New Council Arena"
+                  className="p-1 rounded-md text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/10 border border-cyan-500/20 transition flex items-center gap-0.5 text-[10px]"
+                >
+                  <Plus className="w-3 h-3" />
+                  <span>New</span>
+                </button>
+                <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-1.5 py-0.5 rounded-full">
+                  {hubs.length}
+                </span>
+              </div>
             </div>
 
             <div className="space-y-1">
@@ -332,6 +350,11 @@ export default function App() {
         {activeTab === 'chat' && selectedPersona ? (
           <ChatView
             persona={selectedPersona}
+            personas={personas}
+            onSelectPersona={(p) => {
+              setSelectedPersona(p);
+              setActiveTab('chat');
+            }}
             apiKey={apiKey}
             useLocal={useLocal}
             isVoiceLinkOn={isVoiceLinkOn}
@@ -344,6 +367,7 @@ export default function App() {
             apiKey={apiKey}
             useLocal={useLocal}
             isVoiceLinkOn={isVoiceLinkOn}
+            onOpenCreateHub={() => setIsHubModalOpen(true)}
           />
         ) : activeTab === 'codex' ? (
           <CodexView
@@ -378,6 +402,14 @@ export default function App() {
         onPersonaCreated={handlePersonaCreated}
         apiKey={apiKey}
         useLocal={useLocal}
+      />
+
+      {/* Custom Council Arena Creation Modal */}
+      <HubModal
+        isOpen={isHubModalOpen}
+        onClose={() => setIsHubModalOpen(false)}
+        personas={personas}
+        onHubCreated={handleHubCreated}
       />
 
       {/* Settings Modal */}
