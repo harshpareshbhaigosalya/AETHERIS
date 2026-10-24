@@ -1,0 +1,3 @@
+"""
+AETHERIS backend service package
+"""

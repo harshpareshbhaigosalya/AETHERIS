@@ -1,0 +1,41 @@
+[
+  {
+    "id": "hub-singularity",
+    "title": "Technological Singularity Council",
+    "topic": "The Convergence of Artificial Minds, Consciousness, and Human Destiny",
+    "description": "Where mathematical visionaries and cosmic inventors debate whether machine intelligence will transcend mortal limits.",
+    "persona_ids": ["ada-lovelace", "nikola-tesla"],
+    "icon": "🔮",
+    "prompts": [
+      "Can machines genuinely originate thought, or only execute calculations?",
+      "How will the unification of electricity and algorithmic reasoning transform humanity?",
+      "Is consciousness an emergent computation or a fundamental cosmic frequency?"
+    ]
+  },
+  {
+    "id": "hub-stoic-cosmos",
+    "title": "The Cosmic Stoic Assembly",
+    "topic": "Mastery Over Fate, Reason, and the Infinite Void",
+    "description": "An uncompromising forum examining duty, endurance, scientific ambition, and our tiny place in the cosmos.",
+    "persona_ids": ["marcus-aurelius", "nikola-tesla"],
+    "icon": "🌌",
+    "prompts": [
+      "How should a rational being confront technological disruption without losing inner peace?",
+      "Does scientific progress bring moral virtue, or merely amplify mortal folly?",
+      "What is our ultimate responsibility to the universal order?"
+    ]
+  },
+  {
+    "id": "hub-triumvirate",
+    "title": "The Grand Nexus Colloquium",
+    "topic": "Wisdom, Energy, and the Computational Universe",
+    "description": "A high-council uniting the Stoic Emperor, the Master of Electricity, and the Prophet of Computing.",
+    "persona_ids": ["marcus-aurelius", "nikola-tesla", "ada-lovelace"],
+    "icon": "⚡",
+    "prompts": [
+      "Debate: What is the primary purpose of human consciousness?",
+      "If you could whisper one warning to 21st-century civilization, what would it be?",
+      "Can pure reason and boundless imagination solve the existential crises of our epoch?"
+    ]
+  }
+]
