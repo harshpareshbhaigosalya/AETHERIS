@@ -58,6 +58,19 @@ Using **Google Gemma 4**, we digitize the cognitive DNA of history’s greatest 
 - The backend securely manages the Google AI Studio `GEMINI_API_KEY`.
 - Anyone clicking your deployed link can immediately converse, debate, and synthesize minds with **zero sign-up, zero login, and zero configuration**.
 
+### 6. ✨ Interactive 3D Three.js & Framer Motion Landing Page
+- Interactive 3D WebGL neural core rendering glowing polyhedrons, orbital rings, and dynamic particle clouds responsive to cursor movement.
+- Framer Motion staggered animations, persona showcase galleries, and seamless top-right navigation into the Main Core.
+
+---
+
+## 👨‍💻 Architect & Developer
+
+**Harsh Gosaliya**
+- **Role**: Lead AI Systems Engineer & Creator
+- **GitHub**: [github.com/harshpareshbhaigosalya](https://github.com/harshpareshbhaigosalya)
+- **Initiative**: Hacktoberfest 2026 (*Best Use of Gemma 4* & *Best Open-Source AI Project*)
+
 ---
 
 ## 🏛️ System Architecture
