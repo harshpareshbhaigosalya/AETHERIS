@@ -11,8 +11,7 @@ import {
   Layers,
   ChevronRight,
   ShieldCheck,
-  Cpu,
-  Github
+  Cpu
 } from 'lucide-react';
 import ChatView from './components/ChatView';
 import HubView from './components/HubView';

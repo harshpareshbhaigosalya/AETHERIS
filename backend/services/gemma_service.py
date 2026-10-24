@@ -1,6 +1,8 @@
 import json
 import re
 import os
+import warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
 import requests
 import google.generativeai as genai
 from config import Config
