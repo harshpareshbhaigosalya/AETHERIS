@@ -16,6 +16,7 @@ import {
   MessageSquare,
   Wand2,
   Flame,
+  Award,
   Globe2,
   Heart
 } from 'lucide-react';
